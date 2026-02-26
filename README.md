@@ -1,65 +1,37 @@
-🚆 Train Schedule and Reservation Management System
-📌 Project Overview
+🚆 Train Schedule & Reservation Management System
+Overview
 
-The Train Schedule and Reservation Management System is a centralized software solution designed to manage train schedules, passenger reservations, and ticket allocation.
+The Train Schedule and Reservation Management System is a centralized platform developed to manage train schedules, passenger reservations, and seat allocation. The system is designed to provide structured data management, reduce booking errors, and improve operational efficiency.
 
-The system allows administrators and staff to:
+It allows authorized users to create train schedules, monitor seat availability, process reservations, cancel bookings, and generate basic operational reports.
 
-Manage train schedules
+Project Objectives
 
-Monitor seat availability
+Manage train schedules efficiently
 
-Process ticket bookings
+Track seat availability automatically
 
-Cancel reservations
+Handle booking and cancellation processes
 
-Generate simple reports
+Maintain structured and consistent data
 
-This project is developed as part of the Software Engineering course using Agile (Scrum methodology).
+Support administrative monitoring
 
-🎯 Project Objectives
+System Architecture
 
-Provide structured data management for train schedules
+The system follows a layered architecture:
 
-Improve booking accuracy
+Presentation Layer (Flutter – UI development)
 
-Automatically update seat availability
+Business Logic Layer
 
-Support administrative decision-making
+Data Access Layer
 
-🛠️ Technologies Used
+Relational Database (SQL-based schema)
 
-Git & GitHub for collaboration
+Database Structure
 
-SQL Database (schema.sql inside /database)
-
-Flutter (UI development – in progress)
-
-📂 Project Structure
-Train-Reservation-System
-│
-├── database/
-│   └── schema.sql
-│
-├── flutter_app/   (Coming soon)
-│
-└── README.md
-
-👥 Team Collaboration Strategy
-
-The team follows a structured Git workflow:
-
-Each member works on a separate branch.
-
-No direct commits are allowed on the main branch.
-
-Changes are merged through Pull Requests after review.
-
-The database schema is maintained in a unified file (schema.sql).
-
-🗂️ Database Overview
-
-The system includes the following core tables:
+The database consists of four main tables:
 
 Users
 
@@ -69,20 +41,37 @@ Passenger
 
 Reservation
 
-Each table is structured to maintain data integrity and support booking operations.
+Foreign keys are used to maintain relationships between reservations and train schedules to ensure data integrity.
 
-🔄 Development Methodology
+All database definitions are stored inside:
 
-The project follows Agile methodology using Scrum:
+/database/schema.sql
 
-Sprint planning
+Development Methodology
 
-Task distribution
+This project follows Agile methodology using Scrum principles:
 
-Pull request review
+Feature-based branch workflow
 
-Continuous integration
+Pull requests before merging
 
-📌 Current Status
+Protected main branch
 
-Sprint 2 – System Design and Initial Implementation (In Progress)
+Incremental sprint development
+
+Each team member works on a separate branch and submits changes through pull requests.
+
+Repository Structure
+
+Train-Reservation-System
+│
+├── database/
+│ └── schema.sql
+│
+├── flutter_app/
+│
+└── README.md
+
+Current Status
+
+Sprint 2 – System Design, Database Implementation, and Initial Development.
