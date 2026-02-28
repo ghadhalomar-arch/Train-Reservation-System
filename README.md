@@ -17,12 +17,12 @@ The system ensures structured data handling, automated seat tracking, and contro
 ---
 
 ## 🏗️ System Architecture
-The system follows a layered architecture:
+The system follows the MVC (Model-View-Controller) architectural pattern:
 
-- Presentation Layer (Flutter UI – in progress)
-- Business Logic Layer
-- Data Access Layer
-- Relational Database (SQL)
+- Model: Handles data and business logic (SQL database).
+- View: Flutter UI for display and user inpu
+- Controller: Connects Model and View, processes actions.
+  
 
 ---
 
