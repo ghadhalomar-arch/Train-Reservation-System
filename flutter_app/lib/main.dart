@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'database/db_helper.dart';
 
-
-import 'splash_widget.dart';
-import 'welcome_widget.dart';
-import 'login_widget.dart';
-import 'admin_home_widget.dart';
-import 'staff_home_widget.dart';
+import 'screens/splash_screen.dart';
+import 'screens/welcome_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/admin_menu_page.dart';
+import 'screens/staff_menu_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // تهيئة قاعدة البيانات
+  // تهيئة قاعدة البيانات (ينشئ الجدول + يضيف admin/staff أول مرة)
   await DBHelper.instance.database;
 
   runApp(const MyApp());
@@ -24,16 +24,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'TrainConnect',
 
-      // البداية من Splash
-      initialRoute: SplashWidget.routeName,
+      // أول شاشة
+      initialRoute: SplashPage.routeName,
 
+      // كل الراوتس
       routes: {
-        SplashWidget.routeName: (_) => const SplashWidget(),
-        WelcomeWidget.routeName: (_) => const WelcomeWidget(),
-        LoginWidget.routeName: (_) => const LoginWidget(),
-        AdminHomeWidget.routeName: (_) => const AdminHomeWidget(),
-        StaffHomeWidget.routeName: (_) => const StaffHomeWidget(),
+        SplashPage.routeName: (context) => const SplashPage(),
+        WelcomePage.routeName: (context) => const WelcomePage(),
+        LoginPage.routeName: (context) => const LoginPage(),
+        AdminMenuPage.routeName: (context) => const AdminMenuPage(),
+        StaffMenuPage.routeName: (context) => const StaffMenuPage(),
       },
     );
   }
