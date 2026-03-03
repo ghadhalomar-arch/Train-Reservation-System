@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'database/db_helper.dart';
 
+
+import 'splash_widget.dart';
+import 'welcome_widget.dart';
+import 'login_widget.dart';
+import 'admin_home_widget.dart';
+import 'staff_home_widget.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // تهيئة قاعدة البيانات
   await DBHelper.instance.database;
-
-  final success = await DBHelper.instance.login('admin', '1234');
-  debugPrint('SUCCESS RESULT: ${success != null}');
-
-  final fail = await DBHelper.instance.login('admin', '0000');
-  debugPrint('FAIL RESULT: ${fail != null}');
 
   runApp(const MyApp());
 }
@@ -20,12 +22,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Database Ready ✅'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
+      // البداية من Splash
+      initialRoute: SplashWidget.routeName,
+
+      routes: {
+        SplashWidget.routeName: (_) => const SplashWidget(),
+        WelcomeWidget.routeName: (_) => const WelcomeWidget(),
+        LoginWidget.routeName: (_) => const LoginWidget(),
+        AdminHomeWidget.routeName: (_) => const AdminHomeWidget(),
+        StaffHomeWidget.routeName: (_) => const StaffHomeWidget(),
+      },
     );
   }
 }
