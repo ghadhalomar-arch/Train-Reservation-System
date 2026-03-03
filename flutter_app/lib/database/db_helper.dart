@@ -55,7 +55,7 @@ class DBHelper {
       limit: 1,
     );
 
-    if (result.isNotEmpty) return result.first;
-    return null;
+    if (result.isEmpty) return null;
+    return result.first;
   }
 }
