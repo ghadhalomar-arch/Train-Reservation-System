@@ -12,8 +12,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // تهيئة قاعدة البيانات (ينشئ الجدول + يضيف admin/staff أول مرة)
-  await DBHelper.instance.database;
-
+  if(!KIsWeb){
+   await DBHelper.instance.database; 
+  }
+  
   runApp(const MyApp());
 }
 
