@@ -1,4 +1,4 @@
-Import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class PassengerScreen extends StatefulWidget {
   const PassengerScreen({super.key});
