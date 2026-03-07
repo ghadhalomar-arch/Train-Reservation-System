@@ -31,28 +31,28 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
- 
-void _onSignIn() async {
-  final user = await DBHelper.instance.login(
-    _emailCtrl.text.trim(),
-    _passCtrl.text.trim(),
-  );
-
-  if (user == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Wrong username or password')),
+  void _onSignIn() async {
+    final user = await DBHelper.instance.login(
+      _emailCtrl.text.trim(),
+      _passCtrl.text.trim(),
     );
-    return;
+
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Wrong username or password')),
+      );
+      return;
+    }
+
+    final role = user['role'];
+    print("ROLE = $role");
+    if (role == 'Admin') {
+      Navigator.pushReplacementNamed(context, AdminMenuPage.routeName);
+    } else if (role == 'Staff') {
+      Navigator.pushReplacementNamed(context, StaffMenuPage.routeName);
+    }
   }
 
-  final role = user['role'];
-print("ROLE = $role");
-  if (role == 'Admin') {
-    Navigator.pushReplacementNamed(context, AdminMenuPage.routeName);
-  } else if (role == 'Staff') {
-    Navigator.pushReplacementNamed(context, StaffMenuPage.routeName);
-  }
-}
   InputDecoration _inputDecoration({
     required String hint,
     required IconData prefixIcon,
@@ -60,9 +60,7 @@ print("ROLE = $role");
   }) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: GoogleFonts.inter(
-        color: const Color(0xFF64748B),
-      ),
+      hintStyle: GoogleFonts.inter(color: const Color(0xFF64748B)),
       enabledBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 2),
         borderRadius: BorderRadius.circular(12),
@@ -97,11 +95,7 @@ print("ROLE = $role");
         border: Border.all(color: const Color(0xFFE2E8F0), width: 2),
       ),
       child: Center(
-        child: FaIcon(
-          icon,
-          color: const Color(0xFF538CCB),
-          size: 24,
-        ),
+        child: FaIcon(icon, color: const Color(0xFF538CCB), size: 24),
       ),
     );
   }
@@ -139,7 +133,7 @@ print("ROLE = $role");
                           blurRadius: 20,
                           color: Color(0x33000000),
                           offset: Offset(0, 10),
-                        )
+                        ),
                       ],
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -212,7 +206,8 @@ print("ROLE = $role");
                                     prefixIcon: Icons.lock_outlined,
                                     suffix: InkWell(
                                       onTap: () => setState(
-                                        () => _passwordVisible = !_passwordVisible,
+                                        () => _passwordVisible =
+                                            !_passwordVisible,
                                       ),
                                       child: Icon(
                                         _passwordVisible
@@ -235,26 +230,33 @@ print("ROLE = $role");
 
                                 // Remember + Forgot
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
                                         Theme(
                                           data: ThemeData(
                                             checkboxTheme: CheckboxThemeData(
-                                              visualDensity: VisualDensity.compact,
+                                              visualDensity:
+                                                  VisualDensity.compact,
                                               materialTapTargetSize:
-                                                  MaterialTapTargetSize.shrinkWrap,
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(4),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
                                               ),
                                             ),
                                           ),
                                           child: Checkbox(
                                             value: _rememberMe,
-                                            onChanged: (v) =>
-                                                setState(() => _rememberMe = v ?? false),
-                                            activeColor: const Color(0xFF1E3A8A),
+                                            onChanged: (v) => setState(
+                                              () => _rememberMe = v ?? false,
+                                            ),
+                                            activeColor: const Color(
+                                              0xFF1E3A8A,
+                                            ),
                                             checkColor: Colors.white,
                                           ),
                                         ),
@@ -269,9 +271,7 @@ print("ROLE = $role");
                                       ],
                                     ),
                                     InkWell(
-                                      onTap: () {
-                                       
-                                      },
+                                      onTap: () {},
                                       child: Text(
                                         'Forgot password?',
                                         style: GoogleFonts.inter(
@@ -292,11 +292,15 @@ print("ROLE = $role");
                                   height: 56,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      if (_formKey.currentState?.validate() ?? false) {
+                                      if (_formKey.currentState?.validate() ??
+                                          false) {
                                         _onSignIn();
                                       }
                                     },
-                                    icon: const Icon(Icons.login_rounded, size: 20),
+                                    icon: const Icon(
+                                      Icons.login_rounded,
+                                      size: 20,
+                                    ),
                                     label: Text(
                                       'Sign In',
                                       style: GoogleFonts.interTight(
@@ -340,7 +344,8 @@ print("ROLE = $role");
                               ),
                               const SizedBox(height: 12),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   _socialBox(FontAwesomeIcons.windows),
                                   _socialBox(FontAwesomeIcons.google),
@@ -350,7 +355,9 @@ print("ROLE = $role");
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFF8FAFC),
                                       borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: const Color(0xFFE2E8F0)),
+                                      border: Border.all(
+                                        color: const Color(0xFFE2E8F0),
+                                      ),
                                     ),
                                     child: const Center(
                                       child: FaIcon(

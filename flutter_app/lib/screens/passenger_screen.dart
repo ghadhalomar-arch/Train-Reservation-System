@@ -1,4 +1,4 @@
-Import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class PassengerScreen extends StatefulWidget {
   const PassengerScreen({super.key});
@@ -8,7 +8,6 @@ class PassengerScreen extends StatefulWidget {
 }
 
 class _PassengerScreenState extends State<PassengerScreen> {
-
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController nameController = TextEditingController();
@@ -18,11 +17,8 @@ class _PassengerScreenState extends State<PassengerScreen> {
 
   void confirmBooking() {
     if (_formKey.currentState!.validate()) {
-
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Reservation confirmed successfully"),
-        ),
+        const SnackBar(content: Text("Reservation created successfully")),
       );
 
       nameController.clear();
@@ -36,7 +32,7 @@ class _PassengerScreenState extends State<PassengerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Passenger Details"),
+        title: const Text("Admin Booking Form"),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
@@ -45,7 +41,6 @@ class _PassengerScreenState extends State<PassengerScreen> {
           key: _formKey,
           child: Column(
             children: [
-
               TextFormField(
                 controller: nameController,
                 decoration: const InputDecoration(
@@ -122,7 +117,7 @@ class _PassengerScreenState extends State<PassengerScreen> {
                     ),
                   ),
                   child: const Text(
-                    "Confirm & Book",
+                    "Creat Reservation",
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

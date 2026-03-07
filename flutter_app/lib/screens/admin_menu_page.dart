@@ -50,8 +50,8 @@ class AdminMenuPage extends StatelessWidget {
                   childAspectRatio: 0.7,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    _MenuCard(
+                  children: [
+                    const _MenuCard(
                       title: 'Train Schedule',
                       icon: Icons.train,
                       colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
@@ -59,24 +59,32 @@ class AdminMenuPage extends StatelessWidget {
                     _MenuCard(
                       title: 'Passenger Management',
                       icon: Icons.people,
-                      colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                      colors: const [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PassengerScreen(),
+                          ),
+                        );
+                      },
                     ),
-                    _MenuCard(
+                    const _MenuCard(
                       title: 'Route Planning',
                       icon: Icons.route,
                       colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
                     ),
-                    _MenuCard(
+                    const _MenuCard(
                       title: 'Maintenance',
                       icon: Icons.build,
                       colors: [Color(0xFF1E40AF), Color(0xFF2563EB)],
                     ),
-                    _MenuCard(
+                    const _MenuCard(
                       title: 'Analytics',
                       icon: Icons.analytics,
                       colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
                     ),
-                    _MenuCard(
+                    const _MenuCard(
                       title: 'Notifications',
                       icon: Icons.notifications,
                       colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
@@ -95,7 +103,7 @@ class AdminMenuPage extends StatelessWidget {
                           blurRadius: 4,
                           color: Color(0x4D1E40AF),
                           offset: Offset(0, 2),
-                        )
+                        ),
                       ],
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -151,10 +159,7 @@ class _TopIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const _TopIconButton({
-    required this.icon,
-    required this.onTap,
-  });
+  const _TopIconButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -178,27 +183,20 @@ class _MenuCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final List<Color> colors;
+  final VoidCallback? onTap;
 
   const _MenuCard({
     required this.title,
     required this.icon,
     required this.colors,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
-      onTap: () {
-        if (title == 'Passenger Management') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PassengerScreen(),
-            ),
-          );
-        }
-      },
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -207,7 +205,7 @@ class _MenuCard extends StatelessWidget {
               blurRadius: 8,
               color: Color(0x4D1E40AF),
               offset: Offset(0, 4),
-            )
+            ),
           ],
           gradient: LinearGradient(
             colors: colors,
