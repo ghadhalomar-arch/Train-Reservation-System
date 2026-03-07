@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'passenger_screen.dart';
 
 class AdminMenuPage extends StatelessWidget {
   const AdminMenuPage({super.key});
@@ -42,7 +43,6 @@ class AdminMenuPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 24),
-
                 GridView.count(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
@@ -83,9 +83,7 @@ class AdminMenuPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 24),
-
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Container(
@@ -189,41 +187,54 @@ class _MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 8,
-            color: Color(0x4D1E40AF),
-            offset: Offset(0, 4),
-          )
-        ],
-        gradient: LinearGradient(
-          colors: colors,
-          stops: const [0, 1],
-          begin: const AlignmentDirectional(1, 1),
-          end: const AlignmentDirectional(-1, -1),
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 32),
-            const SizedBox(height: 12),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.interTight(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {
+        if (title == 'Passenger Management') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PassengerScreen(),
             ),
+          );
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 8,
+              color: Color(0x4D1E40AF),
+              offset: Offset(0, 4),
+            )
           ],
+          gradient: LinearGradient(
+            colors: colors,
+            stops: const [0, 1],
+            begin: const AlignmentDirectional(1, 1),
+            end: const AlignmentDirectional(-1, -1),
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 32),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.interTight(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
