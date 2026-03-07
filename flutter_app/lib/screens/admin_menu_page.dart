@@ -240,3 +240,4 @@ class _MenuCard extends StatelessWidget {
     );
   }
 }
+//linked passenger management to passenger_screen.dart  
