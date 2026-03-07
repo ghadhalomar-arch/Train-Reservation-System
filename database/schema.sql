@@ -13,7 +13,22 @@ INSERT INTO users (username, password, role) VALUES ('staff', '1234', 'Staff');
 -- ===== TRAIN (B) =====
  
 -- ===== PASSENGER (E) =====
-
+CREATE TABLE Passenger (
+  passenger_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  national_id TEXT NOT NULL UNIQUE,
+  email TEXT
+);
 -- ===== RESERVATION (C/D) =====
-
+CREATE TABLE Reservation (
+  reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  passenger_id INTEGER NOT NULL,
+  train_id INTEGER NOT NULL,
+  seat_number TEXT,
+  booking_date TEXT,
+  status TEXT DEFAULT 'Confirmed',
+  FOREIGN KEY (passenger_id) REFERENCES Passenger(passenger_id),
+  FOREIGN KEY (train_id) REFERENCES Train(train_id)
+);
 -- ===== REPORT QUERIES (F) =====
