@@ -11,7 +11,17 @@ CREATE TABLE users (
 INSERT INTO users (username, password, role) VALUES ('admin', '1234', 'Admin');
 INSERT INTO users (username, password, role) VALUES ('staff', '1234', 'Staff');
 -- ===== TRAIN (B) =====
- 
+ CREATE TABLE Train (
+  trainId INTEGER PRIMARY KEY AUTOINCREMENT,
+  trainNumber TEXT NOT NULL,
+  source TEXT NOT NULL,
+  destination TEXT NOT NULL,
+  departureTime TEXT NOT NULL,
+  arrivalTime TEXT NOT NULL,
+  capacity INTEGER NOT NULL,
+  availableSeats INTEGER NOT NULL,
+  price REAL NOT NULL
+);
 -- ===== PASSENGER (E) =====
 CREATE TABLE Passenger (
   passenger_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,6 +39,6 @@ CREATE TABLE Reservation (
   booking_date TEXT,
   status TEXT DEFAULT 'Confirmed',
   FOREIGN KEY (passenger_id) REFERENCES Passenger(passenger_id),
-  FOREIGN KEY (train_id) REFERENCES Train(train_id)
+  FOREIGN KEY (train_id) REFERENCES Train(trainId)
 );
 -- ===== REPORT QUERIES (F) =====
