@@ -37,116 +37,132 @@ class AdminMenuPage extends StatelessWidget {
           ],
           elevation: 0,
         ),
+
+        // ⭐⭐⭐ FIXED BODY ⭐⭐⭐
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-            child: Column(
-              children: [
-                const SizedBox(height: 24),
-                GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.7,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    const _MenuCard(
-                      title: 'Train Schedule',
-                      icon: Icons.train,
-                      colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-                    ),
-                    _MenuCard(
-                      title: 'Passenger Management',
-                      icon: Icons.people,
-                      colors: const [Color(0xFF2563EB), Color(0xFF1E40AF)],
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PassengerScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    const _MenuCard(
-                      title: 'Route Planning',
-                      icon: Icons.route,
-                      colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
-                    ),
-                    const _MenuCard(
-                      title: 'Maintenance',
-                      icon: Icons.build,
-                      colors: [Color(0xFF1E40AF), Color(0xFF2563EB)],
-                    ),
-                    const _MenuCard(
-                      title: 'Analytics',
-                      icon: Icons.analytics,
-                      colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-                    ),
-                    const _MenuCard(
-                      title: 'Notifications',
-                      icon: Icons.notifications,
-                      colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1E40AF),
-                      boxShadow: const [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x4D1E40AF),
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'System Status',
-                                style: GoogleFonts.interTight(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'All systems operational',
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  color: const Color(0xFFBFDBFE),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            width: 12,
-                            height: 12,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF10B981),
-                              shape: BoxShape.circle,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 24),
+
+                  GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.7,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+
+                      const _MenuCard(
+                        title: 'Train Schedule',
+                        icon: Icons.train,
+                        colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
+                      ),
+
+                      _MenuCard(
+                        title: 'Passenger Management',
+                        icon: Icons.people,
+                        colors: const [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const PassengerMenuScreen(),
                             ),
+                          );
+                        },
+                      ),
+
+                      const _MenuCard(
+                        title: 'Route Planning',
+                        icon: Icons.route,
+                        colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
+                      ),
+
+                      const _MenuCard(
+                        title: 'Maintenance',
+                        icon: Icons.build,
+                        colors: [Color(0xFF1E40AF), Color(0xFF2563EB)],
+                      ),
+
+                      const _MenuCard(
+                        title: 'Analytics',
+                        icon: Icons.analytics,
+                        colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
+                      ),
+
+                      const _MenuCard(
+                        title: 'Notifications',
+                        icon: Icons.notifications,
+                        colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E40AF),
+                        boxShadow: const [
+                          BoxShadow(
+                            blurRadius: 4,
+                            color: Color(0x4D1E40AF),
+                            offset: Offset(0, 2),
                           ),
                         ],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'System Status',
+                                  style: GoogleFonts.interTight(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'All systems operational',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    color: const Color(0xFFBFDBFE),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF10B981),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
