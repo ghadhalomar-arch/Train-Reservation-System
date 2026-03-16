@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'Cancel_screen.dart';
 
 class StaffMenuPage extends StatelessWidget {
   const StaffMenuPage({super.key});
@@ -37,115 +38,132 @@ class StaffMenuPage extends StatelessWidget {
           elevation: 0,
         ),
         body: SafeArea(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 24),
+          child: SingleChildScrollView( // ✅ لتجنب مشاكل overflow
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 24),
 
-                    GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.7,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        _MenuCard(
-                          title: 'Train Status',
-                          icon: Icons.train,
-                          colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-                        ),
-                        _MenuCard(
-                          title: 'Passenger Management',
-                          icon: Icons.people,
-                          colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
-                        ),
-                        _MenuCard(
-                          title: 'Schedule Updates',
-                          icon: Icons.timer,
-                          colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
-                        ),
-                        _MenuCard(
-                          title: 'Emergency Alerts',
-                          icon: Icons.error,
-                          colors: [Color(0xFF1E40AF), Color(0xFF2563EB)],
-                        ),
-                        _MenuCard(
-                          title: 'Analytics',
-                          icon: Icons.analytics,
-                          colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-                        ),
-                        _MenuCard(
-                          title: 'Notifications',
-                          icon: Icons.notifications,
-                          colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
-                        ),
-                      ],
+                  GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.7,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      _MenuCard(
+                        title: 'Train Status',
+                        icon: Icons.train,
+                        colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
+                      ),
+                      _MenuCard(
+                        title: 'Passenger Management',
+                        icon: Icons.people,
+                        colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                      ),
+                      _MenuCard(
+                        title: 'Schedule Updates',
+                        icon: Icons.timer,
+                        colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
+                      ),
+                      _MenuCard(
+                        title: 'Emergency Alerts',
+                        icon: Icons.error,
+                        colors: [Color(0xFF1E40AF), Color(0xFF2563EB)],
+                      ),
+                      _MenuCard(
+                        title: 'Analytics',
+                        icon: Icons.analytics,
+                        colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
+                      ),
+                      _MenuCard(
+                        title: 'Notifications',
+                        icon: Icons.notifications,
+                        colors: [Color(0xFF2563EB), Color(0xFF1E40AF)],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ✅ زر Cancel Reservation هنا داخل Column
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, CancelReservationPage.routeName);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1E40AF),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
                     ),
+                    child: const Text(
+                      "Cancel Reservation",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
 
-                    const SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF1E40AF),
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x4D1E40AF),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'System Status',
-                                    style: GoogleFonts.interTight(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E40AF),
+                        boxShadow: const [
+                          BoxShadow(
+                            blurRadius: 4,
+                            color: Color(0x4D1E40AF),
+                            offset: Offset(0, 2),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'System Status',
+                                  style: GoogleFonts.interTight(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'All systems operational',
-                                    style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      color: const Color(0xFFBFDBFE),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                width: 12,
-                                height: 12,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF10B981),
-                                  shape: BoxShape.circle,
                                 ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'All systems operational',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    color: const Color(0xFFBFDBFE),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF10B981),
+                                shape: BoxShape.circle,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -184,11 +202,13 @@ class _MenuCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final List<Color> colors;
+  final VoidCallback? onTap;
 
   const _MenuCard({
     required this.title,
     required this.icon,
     required this.colors,
+    this.onTap,
   });
 
   @override
