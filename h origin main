@@ -1,0 +1,38 @@
+[33m34e7222[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Resolved merge conflicts from lulu branch
+[33mbb2705b[m[33m ([m[1;32mlulu[m[33m)[m Updated main.dart, added back buttons and alerts in screens
+[33mc1f2d33[m save my current work before merging
+[33m2abdbf5[m Save work before merge
+[33m4d6642d[m Add cancel reservation page and update Staff menu
+[33md2c6efd[m Add Shouq dashboard screen
+[33m2db5155[m[33m ([m[1;31morigin/booking-feature[m[33m)[m Update schema.sql
+[33md3b1b5d[m Update schema.sql
+[33m3eb43cc[m update admin booking form
+[33m01ddde9[m add passenger booking screen
+[33ma3d4695[m Refactor AdminMenuPage to use InkWell for navigation
+[33mdfcb595[m Merge pull request #7 from ghadhalomar-arch/LeenAbdullahAlotaibi-patch-1
+[33m7f33570[m Add conditional database initialization for non-web
+[33m80755e4[m Update main.dart
+[33m8b92f60[m[33m ([m[1;31morigin/LeenAbdullahAlotaibi-patch-1[m[33m)[m add passenger screen
+[33m38db116[m Merge pull request #6 from ghadhalomar-arch/USERS-(A)-ghada
+[33m78bbcc2[m[33m ([m[1;31morigin/USERS-(A)-ghada[m[33m)[m initial commint flutter app login completed
+[33m77ddcfa[m[33m ([m[1;31morigin/lulu[m[33m)[m Merge pull request #5 from ghadhalomar-arch/USERS-(A)-ghada
+[33m207273e[m[33m ([m[1;32mUSERS-(A)-ghada[m[33m)[m initial commit - train res
+[33me1bf1ea[m Add files via upload
+[33m731049d[m Merge pull request #4 from ghadhalomar-arch/USERS-(A)-ghada
+[33m6cd64ca[m Add users table and sample data
+[33m370d0d8[m Create Doc
+[33mbd16d75[m Delete Doc
+[33m770cbad[m Create Doc
+[33m2670dbd[m Merge pull request #3 from ghadhalomar-arch/USERS-(A)-ghada
+[33m54e70b5[m Add SQLite users table and login logic (A)
+[33m1078263[m Merge pull request #2 from ghadhalomar-arch/USERS-(A)-ghada
+[33mddb6466[m Add final documentation file
+[33mc5373cd[m Merge pull request #1 from ghadhalomar-arch/USERS-(A)-ghada
+[33m6966a7e[m Setup Flutter project and Android emulator
+[33m092978c[m Clarify system architecture as MVC pattern
+[33m0c99720[m Update README with improved structure and headings
+[33m753940c[m Revise README for improved clarity and structure
+[33m80e4476[m Update README with project details and structure
+[33m55ea462[m Create flutter
+[33m2211f23[m Add initial database schema structure
+[33m51b1cae[m Initial commit

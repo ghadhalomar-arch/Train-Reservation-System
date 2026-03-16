@@ -57,6 +57,21 @@ await db.insert('Reservation', {
   'bookingDate': '2026-05-11'
 });
 
+        // ===== Train =====
+          await db.execute('''
+           CREATE TABLE Train (
+             trainId INTEGER PRIMARY KEY AUTOINCREMENT,
+             trainNumber TEXT NOT NULL,
+             source TEXT NOT NULL,
+             destination TEXT NOT NULL,
+             departureTime TEXT NOT NULL,
+             arrivalTime TEXT NOT NULL,
+             capacity INTEGER NOT NULL,
+             availableSeats INTEGER NOT NULL,
+             price REAL NOT NULL
+         )
+         ''');
+
         await db.insert('users', {
           'username': 'admin',
           'password': '1234',
@@ -85,6 +100,7 @@ await db.insert('Reservation', {
     if (result.isEmpty) return null;
     return result.first;
   }
+<<<<<<< HEAD
   Future<Map<String,dynamic>?> getReservation(int reservationId) async {
   final db = await database;
   final res = await db.query(
@@ -116,4 +132,46 @@ Future<int> updateTrainSeats(int trainId, int seatsToAdd) async {
     WHERE id = ?
   ''', [seatsToAdd, trainId]);
 }
+=======
+
+  // ===== Train CRUD =====
+
+Future<int> addTrain(Map<String, dynamic> train) async {
+  final db = await database;
+  return await db.insert('Train', train);
+}
+
+Future<List<Map<String, dynamic>>> getAllTrains() async {
+  final db = await database;
+  return await db.query('Train');
+}
+
+Future<int> updateTrain(int trainId, Map<String, dynamic> train) async {
+  final db = await database;
+  return await db.update(
+    'Train',
+    train,
+    where: 'trainId = ?',
+    whereArgs: [trainId],
+  );
+}
+
+Future<int> deleteTrain(int trainId) async {
+  final db = await database;
+  return await db.delete(
+    'Train',
+    where: 'trainId = ?',
+    whereArgs: [trainId],
+  );
+}
+
+bool validateCapacity(int capacity) {
+  return capacity > 0;
+}
+س
+bool validatePrice(double price) {
+  return price > 0;
+}
+
+>>>>>>> 4e20547daed0663ade85818ea73d741062d53438
 }
