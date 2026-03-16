@@ -100,7 +100,7 @@ await db.insert('Reservation', {
     if (result.isEmpty) return null;
     return result.first;
   }
-<<<<<<< HEAD
+
   Future<Map<String,dynamic>?> getReservation(int reservationId) async {
   final db = await database;
   final res = await db.query(
@@ -127,12 +127,12 @@ Future<int> updateReservationStatus(int reservationId, String status) async {
 Future<int> updateTrainSeats(int trainId, int seatsToAdd) async {
   final db = await database;
   return await db.rawUpdate('''
-    UPDATE trains
-    SET available_seats = available_seats + ?
-    WHERE id = ?
+    UPDATE Train
+    SET availableSeats = availableSeats + ?
+    WHERE trainId = ?
   ''', [seatsToAdd, trainId]);
 }
-=======
+
 
   // ===== Train CRUD =====
 
@@ -168,10 +168,9 @@ Future<int> deleteTrain(int trainId) async {
 bool validateCapacity(int capacity) {
   return capacity > 0;
 }
-س
+
 bool validatePrice(double price) {
   return price > 0;
 }
 
->>>>>>> 4e20547daed0663ade85818ea73d741062d53438
 }

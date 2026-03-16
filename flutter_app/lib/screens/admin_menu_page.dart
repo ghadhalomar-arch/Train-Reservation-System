@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'view_trains_page.dart';
 import 'passenger_screen.dart';
 
 class AdminMenuPage extends StatelessWidget {
@@ -56,11 +57,19 @@ class AdminMenuPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
 
-                      const _MenuCard(
-                        title: 'Train Schedule',
-                        icon: Icons.train,
-                        colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-                      ),
+                    _MenuCard(
+                       title: 'Train Schedule',
+                       icon: Icons.train,
+                       colors: const [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
+                       onTap: () {
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                              builder: (context) => const TrainListPage(),
+                           ),
+                         );
+                        },
+                    ),
 
                       _MenuCard(
                         title: 'Passenger Management',
