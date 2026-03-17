@@ -50,10 +50,7 @@ class _BookTicketScreenState extends State<BookTicketScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => PassengerScreen(
-            trainId: trainId,
-            seatNumber: seatNumberText,
-          ),
+          builder: (_) => PassengerMenuScreen(),
         ),
       );
     } catch (e) {
