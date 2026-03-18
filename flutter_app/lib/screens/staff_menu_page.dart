@@ -38,13 +38,12 @@ class StaffMenuPage extends StatelessWidget {
           elevation: 0,
         ),
         body: SafeArea(
-          child: SingleChildScrollView( // ✅ لتجنب مشاكل overflow
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
               child: Column(
                 children: [
                   const SizedBox(height: 24),
-
                   GridView.count(
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
@@ -85,28 +84,27 @@ class StaffMenuPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 24),
-
-                  // ✅ زر Cancel Reservation هنا داخل Column
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(
-                          context, CancelReservationPage.routeName);
+                        context,
+                        CancelReservationPage.routeName,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1E40AF),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 15),
+                        horizontal: 40,
+                        vertical: 15,
+                      ),
                     ),
                     child: const Text(
                       "Cancel Reservation",
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
-
                   const SizedBox(height: 24),
-
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Container(

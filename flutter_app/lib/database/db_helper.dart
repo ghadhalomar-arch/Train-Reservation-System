@@ -173,4 +173,25 @@ bool validatePrice(double price) {
   return price > 0;
 }
 
+Future<int> addReservation(Map<String, dynamic> reservation) async {
+  final db = await database;
+
+  final result = await db.rawQuery(
+    'SELECT MAX(reservationID) as maxId FROM Reservation',
+  );
+
+  int nextId = 1;
+  if (result.isNotEmpty && result.first['maxId'] != null) {
+    nextId = (result.first['maxId'] as int) + 1;
+  }
+
+  return await db.insert(
+    'Reservation',
+    {
+      'reservationID': nextId,
+      ...reservation,
+    },
+  );
+}
+
 }

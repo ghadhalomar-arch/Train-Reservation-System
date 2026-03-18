@@ -9,7 +9,7 @@ import 'screens/login_screen.dart';
 import 'screens/admin_menu_page.dart';
 import 'screens/staff_menu_page.dart';
 import 'screens/passenger_screen.dart';
-
+import 'screens/book_ticket_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -36,10 +36,11 @@ class MyApp extends StatelessWidget {
         AdminMenuPage.routeName: (context) => const AdminMenuPage(),
         StaffMenuPage.routeName: (context) => const StaffMenuPage(),
         PassengerMenuScreen.routeName: (context) =>
-            const PassengerMenuScreen(),
+       const PassengerMenuScreen(),
         CancelReservationPage.routeName: (context) =>
-            const CancelReservationPage(),
+        const CancelReservationPage(),
+        BookTicketScreen.routeName: (context) => const BookTicketScreen(),
       },
     );
   }
-}
+} 
