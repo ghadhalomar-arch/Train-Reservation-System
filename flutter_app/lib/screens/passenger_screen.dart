@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Cancel_screen.dart';
 import 'book_ticket_screen.dart';
+import 'review_reservation_screen.dart';
+
 class PassengerMenuScreen extends StatelessWidget {
   const PassengerMenuScreen({super.key});
 
@@ -19,25 +21,22 @@ class PassengerMenuScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-  onPressed: () {
-    Navigator.pushNamed(context, BookTicketScreen.routeName);
-  },
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue,
-    minimumSize: const Size(double.infinity, 50),
-  ),
-  child: const Text(
-    "Book Reservation",
-    style: TextStyle(fontSize: 18),
-  ),
-),
+              onPressed: () {
+                Navigator.pushNamed(context, BookTicketScreen.routeName);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text(
+                "Book Reservation",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  CancelReservationPage.routeName,
-                );
+                Navigator.pushNamed(context, CancelReservationPage.routeName);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -51,16 +50,14 @@ class PassengerMenuScreen extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Catalog page not ready yet")),
-                );
+                Navigator.pushNamed(context, ReviewReservationScreen.routeName);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text(
-                "Catalog",
+                "Review Reservation",
                 style: TextStyle(fontSize: 18),
               ),
             ),
