@@ -19,7 +19,7 @@ class DBHelper {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE users (
@@ -29,48 +29,49 @@ class DBHelper {
             role TEXT NOT NULL
           )
         ''');
+
         await db.execute('''
-    CREATE TABLE Reservation (
-      reservationID INTEGER PRIMARY KEY,
-      passengerID INTEGER,
-      trainID INTEGER,
-      seats INTEGER,
-      status TEXT,
-      bookingDate TEXT
-    )
-  ''');
-  await db.insert('Reservation', {
-  'reservationID': 1,
-  'passengerID': 101,
-  'trainID': 1,
-  'seats': 2,
-  'status': 'Confirmed',
-  'bookingDate': '2026-05-10'
-});
+          CREATE TABLE Reservation (
+            reservationID INTEGER PRIMARY KEY,
+            passengerID INTEGER,
+            trainID INTEGER,
+            seats INTEGER,
+            status TEXT,
+            bookingDate TEXT
+          )
+        ''');
 
-await db.insert('Reservation', {
-  'reservationID': 2,
-  'passengerID': 102,
-  'trainID': 2,
-  'seats': 1,
-  'status': 'Confirmed',
-  'bookingDate': '2026-05-11'
-});
+        await db.execute('''
+          CREATE TABLE Train (
+            trainId INTEGER PRIMARY KEY AUTOINCREMENT,
+            trainNumber TEXT NOT NULL,
+            source TEXT NOT NULL,
+            destination TEXT NOT NULL,
+            departureTime TEXT NOT NULL,
+            arrivalTime TEXT NOT NULL,
+            capacity INTEGER NOT NULL,
+            availableSeats INTEGER NOT NULL,
+            price REAL NOT NULL
+          )
+        ''');
 
-        // ===== Train =====
-          await db.execute('''
-           CREATE TABLE Train (
-             trainId INTEGER PRIMARY KEY AUTOINCREMENT,
-             trainNumber TEXT NOT NULL,
-             source TEXT NOT NULL,
-             destination TEXT NOT NULL,
-             departureTime TEXT NOT NULL,
-             arrivalTime TEXT NOT NULL,
-             capacity INTEGER NOT NULL,
-             availableSeats INTEGER NOT NULL,
-             price REAL NOT NULL
-         )
-         ''');
+        await db.insert('Reservation', {
+          'reservationID': 1,
+          'passengerID': 101,
+          'trainID': 1,
+          'seats': 2,
+          'status': 'Confirmed',
+          'bookingDate': '2026-05-10',
+        });
+
+        await db.insert('Reservation', {
+          'reservationID': 2,
+          'passengerID': 102,
+          'trainID': 2,
+          'seats': 1,
+          'status': 'Confirmed',
+          'bookingDate': '2026-05-11',
+        });
 
         await db.insert('users', {
           'username': 'admin',
@@ -83,6 +84,43 @@ await db.insert('Reservation', {
           'password': '1234',
           'role': 'Staff',
         });
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 3) {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS Train (
+              trainId INTEGER PRIMARY KEY AUTOINCREMENT,
+              trainNumber TEXT NOT NULL,
+              source TEXT NOT NULL,
+              destination TEXT NOT NULL,
+              departureTime TEXT NOT NULL,
+              arrivalTime TEXT NOT NULL,
+              capacity INTEGER NOT NULL,
+              availableSeats INTEGER NOT NULL,
+              price REAL NOT NULL
+            )
+          ''');
+
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS Reservation (
+              reservationID INTEGER PRIMARY KEY,
+              passengerID INTEGER,
+              trainID INTEGER,
+              seats INTEGER,
+              status TEXT,
+              bookingDate TEXT
+            )
+          ''');
+
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              username TEXT NOT NULL UNIQUE,
+              password TEXT NOT NULL,
+              role TEXT NOT NULL
+            )
+          ''');
+        }
       },
     );
   }
@@ -101,76 +139,95 @@ await db.insert('Reservation', {
     return result.first;
   }
 
-  Future<Map<String,dynamic>?> getReservation(int reservationId) async {
-  final db = await database;
-  final res = await db.query(
-    'Reservation',
-    where: 'reservationID= ?',
-    whereArgs: [reservationId],
-    limit: 1,
-  );
-  if(res.isEmpty) return null;
-  return res.first;
-}
+  Future<Map<String, dynamic>?> getReservation(int reservationId) async {
+    final db = await database;
+    final res = await db.query(
+      'Reservation',
+      where: 'reservationID = ?',
+      whereArgs: [reservationId],
+      limit: 1,
+    );
+    if (res.isEmpty) return null;
+    return res.first;
+  }
 
-Future<int> updateReservationStatus(int reservationId, String status) async {
-  final db = await database;
-  return await db.update(
-    'Reservation',
-    {'status': status},
-    where: 'reservationID = ?',
-    whereArgs: [reservationId],
-  );
-}
+  Future<int> updateReservationStatus(int reservationId, String status) async {
+    final db = await database;
+    return await db.update(
+      'Reservation',
+      {'status': status},
+      where: 'reservationID = ?',
+      whereArgs: [reservationId],
+    );
+  }
 
+  Future<int> updateTrainSeats(int trainId, int seatsToAdd) async {
+    final db = await database;
+    return await db.rawUpdate(
+      '''
+      UPDATE Train
+      SET availableSeats = availableSeats + ?
+      WHERE trainId = ?
+      ''',
+      [seatsToAdd, trainId],
+    );
+  }
 
-Future<int> updateTrainSeats(int trainId, int seatsToAdd) async {
-  final db = await database;
-  return await db.rawUpdate('''
-    UPDATE Train
-    SET availableSeats = availableSeats + ?
-    WHERE trainId = ?
-  ''', [seatsToAdd, trainId]);
-}
+  Future<int> addTrain(Map<String, dynamic> train) async {
+    final db = await database;
+    return await db.insert('Train', train);
+  }
 
+  Future<List<Map<String, dynamic>>> getAllTrains() async {
+    final db = await database;
+    return await db.query('Train');
+  }
 
-  // ===== Train CRUD =====
+  Future<int> updateTrain(int trainId, Map<String, dynamic> train) async {
+    final db = await database;
+    return await db.update(
+      'Train',
+      train,
+      where: 'trainId = ?',
+      whereArgs: [trainId],
+    );
+  }
 
-Future<int> addTrain(Map<String, dynamic> train) async {
-  final db = await database;
-  return await db.insert('Train', train);
-}
+  Future<int> deleteTrain(int trainId) async {
+    final db = await database;
+    return await db.delete('Train', where: 'trainId = ?', whereArgs: [trainId]);
+  }
 
-Future<List<Map<String, dynamic>>> getAllTrains() async {
-  final db = await database;
-  return await db.query('Train');
-}
+  bool validateCapacity(int capacity) {
+    return capacity > 0;
+  }
 
-Future<int> updateTrain(int trainId, Map<String, dynamic> train) async {
-  final db = await database;
-  return await db.update(
-    'Train',
-    train,
-    where: 'trainId = ?',
-    whereArgs: [trainId],
-  );
-}
+  bool validatePrice(double price) {
+    return price > 0;
+  }
 
-Future<int> deleteTrain(int trainId) async {
-  final db = await database;
-  return await db.delete(
-    'Train',
-    where: 'trainId = ?',
-    whereArgs: [trainId],
-  );
-}
+  Future<int> addReservation(Map<String, dynamic> reservation) async {
+    final db = await database;
 
-bool validateCapacity(int capacity) {
-  return capacity > 0;
-}
+    final result = await db.rawQuery(
+      'SELECT MAX(reservationID) as maxId FROM Reservation',
+    );
 
-bool validatePrice(double price) {
-  return price > 0;
-}
+    int nextId = 1;
+    if (result.isNotEmpty && result.first['maxId'] != null) {
+      nextId = (result.first['maxId'] as int) + 1;
+    }
 
+    return await db.insert('Reservation', {
+      'reservationID': nextId,
+      ...reservation,
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getAllReservations() async {
+    final db = await database;
+    final result = await db.query('Reservation');
+    print('ALL RESERVATIONS: $result');
+    return result;
+  }
 }
