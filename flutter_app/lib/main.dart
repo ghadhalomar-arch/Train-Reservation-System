@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import 'database/db_helper.dart';
-import 'screens/Cancel_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
@@ -11,10 +10,12 @@ import 'screens/staff_menu_page.dart';
 import 'screens/passenger_screen.dart';
 import 'screens/book_ticket_screen.dart';
 import 'screens/review_reservation_screen.dart';
+import 'screens/Cancel_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize database (only for mobile)
   if (!kIsWeb) {
     await DBHelper.instance.database;
   }
@@ -30,12 +31,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TrainConnect',
+
+      // First screen
       initialRoute: SplashPage.routeName,
+
       routes: {
+
         SplashPage.routeName: (context) => const SplashPage(),
+
         WelcomePage.routeName: (context) => const WelcomePage(),
+
         LoginPage.routeName: (context) => const LoginPage(),
+
         AdminMenuPage.routeName: (context) => const AdminMenuPage(),
+
         StaffMenuPage.routeName: (context) => const StaffMenuPage(),
         PassengerMenuScreen.routeName: (context) => const PassengerMenuScreen(),
         CancelReservationPage.routeName: (context) =>
@@ -47,3 +56,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
