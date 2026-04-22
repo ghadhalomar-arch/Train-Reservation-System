@@ -15,11 +15,11 @@ class DBHelper {
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'train_reservation.db');
+    final path = join(dbPath, 'train_reservation_v6.db');
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE users (
@@ -55,23 +55,7 @@ class DBHelper {
           )
         ''');
 
-        await db.insert('Reservation', {
-          'reservationID': 1,
-          'passengerID': 101,
-          'trainID': 1,
-          'seats': 2,
-          'status': 'Confirmed',
-          'bookingDate': '2026-05-10',
-        });
-
-        await db.insert('Reservation', {
-          'reservationID': 2,
-          'passengerID': 102,
-          'trainID': 2,
-          'seats': 1,
-          'status': 'Confirmed',
-          'bookingDate': '2026-05-11',
-        });
+  
 
         await db.insert('users', {
           'username': 'admin',
