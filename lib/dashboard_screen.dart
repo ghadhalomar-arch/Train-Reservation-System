@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// Dashboard screen - Shouq Alabdulsalam
-// Reports and statistics for Train Reservation System
+import 'screens/book_ticket_screen.dart';
+import 'screens/view_trains_page.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -24,20 +24,20 @@ class DashboardScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildCard('Total Bookings', '124'),
+            _buildCard(context, 'Total Bookings', '124', const BookTicketScreen()),
             const SizedBox(height: 12),
-            _buildCard('Total Revenue', 'SAR 18,600'),
+            _buildCard(context, 'Total Revenue', 'SAR 18,600', null),
             const SizedBox(height: 12),
-            _buildCard('Seat Occupancy', '62%'),
+            _buildCard(context, 'Seat Occupancy', '62%', const ViewTrainsPage()),
             const SizedBox(height: 12),
-            _buildCard('Available Seats', '76'),
+            _buildCard(context, 'Available Seats', '76', const ViewTrainsPage()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCard(String title, String value) {
+  Widget _buildCard(BuildContext context, String title, String value, Widget? screen) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -45,12 +45,24 @@ class DashboardScreen extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
-        '$title: $value',
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+      child: Column(
+        children: [
+          Text(
+            '$title: $value',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          if (screen != null)
+            TextButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => screen),
+              ),
+              child: const Text('View Details'),
+            ),
+        ],
       ),
     );
   }
